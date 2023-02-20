@@ -17,6 +17,6 @@ function getCountryName (event) {
     return country;
 }
 
-fetchCountries(country).then(data => {
-      const {name:{official}, capital, population, flags:{svg}, languages} = data[0];
-})
+// fetchCountries(country).then(data => {
+//       const {name:{official}, capital, population, flags:{svg}, languages} = data[0];
+// })
