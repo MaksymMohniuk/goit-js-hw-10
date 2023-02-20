@@ -30,11 +30,11 @@ fetchCountries(data).then(coutries => {
 }
 ).catch(onError);
 
-function createCountriesList({flags, name}) {
-    return `<li>
-    <span> </span>
-    </li>`
-}
+// function createCountriesList({flags, name}) {
+//     return `<li>
+//     <span> </span>
+//     </li>`
+// }
 
 
 
