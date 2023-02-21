@@ -1,5 +1,5 @@
 import './css/styles.css';
-import fetchCountries from './fetchCountries.js';
+import { fetchCountries } from './fetchCountries.js';
 import debounce from 'lodash.debounce'
 import Notiflix from 'notiflix';
 
@@ -20,7 +20,7 @@ function getCountryName (event) {
 
 fetchCountries(data).then(coutries => {
     if(coutries.length > 10) {
-        Notify.info("Too many matches found. Please enter a more specific name.");
+        Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
     } else if(countries.length >= 2 && countries.length <=10) {
         const list = countries.reduce((markup, country) => createCountriesList(country) + markup, '');
         createCountriesList(list);
@@ -29,7 +29,12 @@ fetchCountries(data).then(coutries => {
         createCountryCard(card);
     }
 }
-).catch(onError);
+).then(renderCountryList)
+.catch(onError);
+
+function renderCountryList(markup) {
+    countryList.insertAdjacentHTML("beforeend", markup);
+}
 
 function createCountriesList({flags, name}) {
     return `<li>
@@ -50,5 +55,5 @@ function createCountryCard({flags, name, capital, population, languages}) {
 }
 
 function onError(err) {
-    Notify.failure("Oops, there is no country with that name");
+    Notiflix.Notify.failure("Oops, there is no country with that name");
   }
