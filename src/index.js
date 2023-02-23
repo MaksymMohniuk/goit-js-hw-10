@@ -20,14 +20,12 @@ function getCountryName (event) {
         } else if(countries.length >= 2 && countries.length <=10) {
             const list = countries.reduce((markup, country) => createCountriesList(country) + markup, '');
             createCountriesList(list);
+            renderCountryList();
         } else {
-            const card = countries.reduce((markup, country) => createCountryCard(country) + markup, '');
-            createCountryCard(card);
+            createCountryCard(countries[0]);
         }
     }
-    ).then(renderCountryList)
-    .catch(onError);
-    return countries;
+    ).catch(onError);
 }
 
 function renderCountryList(markup) {
