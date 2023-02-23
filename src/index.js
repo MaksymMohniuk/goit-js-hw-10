@@ -20,16 +20,21 @@ function getCountryName (event) {
         } else if(countries.length >= 2 && countries.length <=10) {
             const list = countries.reduce((markup, country) => createCountriesList(country) + markup, '');
             createCountriesList(list);
+            renderCountryList(createCountryList(countries[0]));
            
         } else {
             createCountryCard(countries[0]);
-            renderCountryList(createCountryCard(countries[0]));
+            renderCountryCard(createCountryCard(countries[0]));
         }
     }
     ).catch(onError);
 }
 
-function renderCountryList(markup) {
+function renderCountryList() {
+    countryList.insertAdjacentHTML("beforeend", createCountriesList(countries[0]));
+}
+
+function renderCountryCard() {
     countryInfo.insertAdjacentHTML("beforeend", createCountryCard(countries[0]));
 }
 
