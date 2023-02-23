@@ -13,24 +13,22 @@ const countryInfo = document.querySelector('.country-info');
 searchCountry.addEventListener('input', debounce(getCountryName, DEBOUNCE_DELAY));
 
 function getCountryName (event) {
-    event.preventDefault();
     data = event.target.value.trim();
-    return data;
-}
-
-fetchCountries(data).then(coutries => {
-    if(coutries.length > 10) {
-        Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
-    } else if(countries.length >= 2 && countries.length <=10) {
-        const list = countries.reduce((markup, country) => createCountriesList(country) + markup, '');
-        createCountriesList(list);
-    } else {
-        const card = countries.reduce((markup, country) => createCountryCard(country) + markup, '');
-        createCountryCard(card);
+    fetchCountries(data).then(coutries => {
+        if(coutries.length > 10) {
+            Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
+        } else if(countries.length >= 2 && countries.length <=10) {
+            const list = countries.reduce((markup, country) => createCountriesList(country) + markup, '');
+            createCountriesList(list);
+        } else {
+            const card = countries.reduce((markup, country) => createCountryCard(country) + markup, '');
+            createCountryCard(card);
+        }
     }
+    ).then(renderCountryList)
+    .catch(onError);
+    return countries;
 }
-).then(renderCountryList)
-.catch(onError);
 
 function renderCountryList(markup) {
     countryList.insertAdjacentHTML("beforeend", markup);
