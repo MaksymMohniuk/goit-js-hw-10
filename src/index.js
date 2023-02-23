@@ -20,16 +20,17 @@ function getCountryName (event) {
         } else if(countries.length >= 2 && countries.length <=10) {
             const list = countries.reduce((markup, country) => createCountriesList(country) + markup, '');
             createCountriesList(list);
-            renderCountryList();
+           
         } else {
             createCountryCard(countries[0]);
+            renderCountryList(createCountryCard(countries[0]));
         }
     }
     ).catch(onError);
 }
 
 function renderCountryList(markup) {
-    countryList.insertAdjacentHTML("beforeend", markup);
+    countryInfo.insertAdjacentHTML("beforeend", createCountryCard(countries[0]));
 }
 
 function createCountriesList({flags, name}) {
