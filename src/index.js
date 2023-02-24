@@ -23,6 +23,8 @@ function getCountryName(event) {
   }
   fetchCountries(data)
     .then(countries => {
+    countryList.innerHTML = '';
+    countryInfo.innerHTML = '';
       if (countries.length > 10) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
