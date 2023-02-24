@@ -39,7 +39,7 @@ function getCountryName(event) {
         renderCountryCard(createCountryCard(countries[0]));
       }
     })
-    .catch(Notiflix.Notify.failure('Oops, there is no country with that name'));
+    .catch(error=>{Notiflix.Notify.failure('Oops, there is no country with that name');console.log(error)})
 }
 
 function renderCountryList(string) {
