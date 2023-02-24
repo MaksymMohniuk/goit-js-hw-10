@@ -4,7 +4,6 @@ import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 
 let data;
-// let countries;
 const DEBOUNCE_DELAY = 300;
 const searchCountry = document.getElementById('search-box');
 const countryList = document.querySelector('.country-list');
@@ -17,6 +16,11 @@ searchCountry.addEventListener(
 
 function getCountryName(event) {
   data = event.target.value.trim();
+  if(data.length === 0) {
+    countryList.innerHTML = '';
+    countryInfo.innerHTML = '';
+    return;
+  }
   fetchCountries(data)
     .then(countries => {
       if (countries.length > 10) {
@@ -31,7 +35,6 @@ function getCountryName(event) {
         createCountriesList(list);
         renderCountryList(createCountryList(countries));
       } else {
-        // createCountryCard(countries[0]);
         renderCountryCard(createCountryCard(countries[0]));
       }
     })
@@ -48,22 +51,22 @@ function renderCountryCard(obj) {
 
 function createCountriesList({ flags, name }) {
   return `<li>
-    <span>${flags.svg}</span>
+    <span> <img src=${flags.svg} alt = 'flag' width = 40 /></span>
     <p>${name.official}</p>
     </li>`;
 }
 
 function createCountryCard({ flags, name, capital, population, languages }) {
-  return `<span>${flags.svg}</span>
+  return `<span><img src=${flags.svg} alt='flag' width=40 /></span>
     <h2>${name.official}</h2>
     <ul>
-    <li><p>${capital}</p></li>
-    <li><p>${population}</p></li>
-    <li><p>${Object.values(languages)}</p></li>
+    <li><b>Capital: ${capital}</b></li>
+    <li><b>Population: ${population}</b></li>
+    <li><b>Languages: ${Object.values(languages)}</b></li>
     </ul>
     `;
 }
 
 function onError(err) {
-  Notiflix.Notify.failure('Oops, there is no country with that name');
+  console.log(err);
 }
