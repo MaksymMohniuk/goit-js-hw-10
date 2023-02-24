@@ -22,3 +22,14 @@ body {
 .list {
   list-style: none;
 }
+
+.card {
+  list-style: none;
+}
+
+.country-list {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
