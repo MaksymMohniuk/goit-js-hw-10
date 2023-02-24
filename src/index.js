@@ -38,7 +38,7 @@ function getCountryName(event) {
         renderCountryCard(createCountryCard(countries[0]));
       }
     })
-    .catch(onError);
+    .catch(err);
 }
 
 function renderCountryList(string) {
@@ -51,22 +51,22 @@ function renderCountryCard(obj) {
 
 function createCountriesList({ flags, name }) {
   return `<li>
-    <span> <img src=${flags.svg} alt = 'flag' width = 40 /></span>
+    <span> <img src='${flags.svg}' alt='flag' width='70' /></span>
     <p>${name.official}</p>
     </li>`;
 }
 
 function createCountryCard({ flags, name, capital, population, languages }) {
-  return `<span><img src=${flags.svg} alt='flag' width=40 /></span>
+  return `<span><img src='${flags.svg}' alt='flag' width='70' /></span>
     <h2>${name.official}</h2>
     <ul>
-    <li><b>Capital: ${capital}</b></li>
-    <li><b>Population: ${population}</b></li>
-    <li><b>Languages: ${Object.values(languages)}</b></li>
+    <li class='list'><b>Capital: ${capital}</b></li>
+    <li class='list'><b>Population: ${population}</b></li>
+    <li class='list'><b>Languages: ${Object.values(languages)}</b></li>
     </ul>
     `;
 }
 
-function onError(err) {
-  console.log(err);
-}
+// function onError(err) {
+//   console.log(err);
+// }
